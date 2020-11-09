@@ -40,4 +40,19 @@ class Todo extends BaseController {
             return redirect('todo');
         }
     }
+    // todo 6/6
+    public function delete($id) {
+        // Tarkistetaan että annettu id on numeerinen SQL injection torjumiseksi.
+        if (!is_numeric($id)) {
+            throw new \Exception('Provided id is not an number.');
+        }
+        // Vain kirjautuneet voivat poistaa.
+        if (!isset($_SESSION['user'])) {
+            return redirect('login');
+        }
+        $model = new TodoModel();
+
+        $model->remove($id);
+        return redirect('todo');
+    }
 }

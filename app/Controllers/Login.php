@@ -44,8 +44,8 @@ class Login extends BaseController {
             $model->save([
                 'username' => $this->request->getVar('user'),
                 'password' => password_hash($this->request->getVar('password'),PASSWORD_DEFAULT),
-                'firstname' => $this->request->getVar('fname'),
-                'lastname' => $this->request->getVar('lname'),
+                'firstname' => $this->request->getVar('firstname'),
+                'lastname' => $this->request->getVar('lastname'),
             ]);
             return redirect('login');
         }
