@@ -1,12 +1,24 @@
-DROP DATABASE IF EXISTS todo;
+drop database if exists todo;
 
-CREATE DATABASE todo;
+create database todo;
 
 use todo;
 
-CREATE TABLE task (
-	id int PRIMARY KEY AUTO_INCREMENT,
+create table user (
+    id int primary key auto_increment,
+    username varchar(30) not null unique,
+    password varchar(255) not null,
+    firstname varchar(100),
+    lastname varchar(100)
+);
+
+create table task (
+	id int primary key auto_increment,
     title varchar(255) not null,
-    added timestamp DEFAULT CURRENT_TIMESTAMP,
-    description text
+    added timestamp default current_timestamp,
+    description text,
+    user_id int not null,
+    index (user_id),
+    foreign key (user_id) references user(id)
+    on delete restrict
 )
